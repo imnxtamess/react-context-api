@@ -1,23 +1,11 @@
-import { useState, useEffect } from "react";
-
+import PostContext from "../contexts/PostContext";
+import { useContext } from "react";
 export default function PostCard() {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch((err) => {
-        console.log("ERROR", err);
-      });
-  }, []);
-
-  console.log(posts);
+  const { posts } = useContext(PostContext);
   return (
     <>
       {posts.map((post) => (
-        <div key={posts.id} className="col">
+        <div key={post.id} className="col">
           <div className="card">
             <div className="card-body ">
               <h4>{post.title}</h4>
