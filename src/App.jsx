@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import PostContext from "./contexts/PostContext";
 import { AlertProvider, useAlertContext } from "./contexts/AlertContext";
 
-export default function App() {
+function AppContent() {
   const { setAlertData } = useAlertContext();
   const [posts, setPosts] = useState([]);
 
@@ -21,13 +21,18 @@ export default function App() {
         });
       });
   }, []);
+  return (
+    <PostContext.Provider value={{ posts: posts }}>
+      <Alert />
+      <PostPage />
+    </PostContext.Provider>
+  );
+}
 
+export default function App() {
   return (
     <AlertProvider>
-      <PostContext.Provider value={{ posts: posts }}>
-        <Alert />
-        <PostPage />
-      </PostContext.Provider>
+      <AppContent />
     </AlertProvider>
   );
 }
