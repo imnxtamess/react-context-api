@@ -2,8 +2,7 @@ import Alert from "./components/Alert";
 import PostPage from "./pages/PostPage";
 import { useState, useEffect } from "react";
 import PostContext from "./contexts/PostContext";
-import { AlertProvider } from "./contexts/alertContext";
-import { useAlertContext } from "./contexts/alertContext";
+import { AlertProvider, useAlertContext } from "./contexts/AlertContext";
 
 export default function App() {
   const { setAlertData } = useAlertContext();
