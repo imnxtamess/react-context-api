@@ -2,10 +2,13 @@ import Alert from "./components/Alert";
 import PostPage from "./pages/PostPage";
 import { useState, useEffect } from "react";
 import PostContext from "./contexts/PostContext";
-import AlertContext from "./contexts/alertContext";
+import { AlertProvider } from "./contexts/alertContext";
+import { useAlertContext } from "./contexts/alertContext";
 
 export default function App() {
+  const { setAlertData } = useAlertContext();
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
@@ -13,17 +16,19 @@ export default function App() {
         setPosts(data);
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        setAlertData({
+          type: "error",
+          message: err.message,
+        });
       });
   }, []);
 
-  const alertData = { type: "info", message: "Hello from Context!" };
   return (
-    <AlertContext.Provider value={alertData}>
+    <AlertProvider>
       <PostContext.Provider value={{ posts: posts }}>
         <Alert />
         <PostPage />
       </PostContext.Provider>
-    </AlertContext.Provider>
+    </AlertProvider>
   );
 }

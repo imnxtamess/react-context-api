@@ -1,7 +1,8 @@
-import AlertContext from "../contexts/alertContext";
-import { useContext } from "react";
+import { useAlertContext } from "../contexts/alertContext";
+
 export default function Alert() {
-  const { type, message } = useContext(AlertContext);
+  const { alertData } = useAlertContext();
+  const { type, message } = alertData;
 
   if (!message) return null;
 
