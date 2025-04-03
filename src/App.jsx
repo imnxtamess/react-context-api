@@ -1,3 +1,5 @@
+import PostPage from "./pages/PostPage";
+
 export default function App() {
-  return <h1>HelloWorld</h1>;
+  return <PostPage />;
 }
